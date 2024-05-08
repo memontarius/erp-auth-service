@@ -26,6 +26,8 @@ return new class extends Migration
                 ->constrained(table: 'roles')
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
+
+            $table->unique(['user_id', 'company_id', 'role_id']);
         });
     }
 

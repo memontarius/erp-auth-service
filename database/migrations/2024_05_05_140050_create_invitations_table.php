@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('invitations', function (Blueprint $table) {
             $table->id();
             $table->string('email');
-            $table->text('token');
+            $table->string('token', 1024);
             $table->timestamps();
         });
     }

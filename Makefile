@@ -10,6 +10,7 @@ cnn=$(APP_NAME)_app # Container name
 prepare-env:
 	cp -n .env.example .env || true
 	make key
+	php artisan jwt:secret
 
 install:
 	composer install

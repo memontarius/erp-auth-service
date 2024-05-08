@@ -5,15 +5,7 @@ use App\Http\Controllers\InvitationController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::group([
-    'middleware' => 'api'
-], function ($router) {
-    Route::post('login', [UserController::class, 'login']);
-
-    //Route::post('logout', [UserController::class, 'logout']);
-    //Route::post('me', [UserController::class, 'user']);
-    //Route::post('refresh', [UserController::class, 'refresh']);
-});
+Route::post('login', [UserController::class, 'login']);
 
 Route::middleware('auth:invitation')->group(function () {
     Route::post('user/activate', [UserController::class, 'activate']);

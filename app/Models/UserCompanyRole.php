@@ -2,11 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\Pivot;
+
 
 class UserCompanyRole extends Pivot
 {
@@ -22,5 +21,15 @@ class UserCompanyRole extends Pivot
     public function company(): BelongsTo
     {
         return $this->belongsTo(Company::class, 'company_id', 'id');
+    }
+
+    public function scopeOfUser(Builder $query, string $userId): void
+    {
+        $query->where('user_id', $userId);
+    }
+
+    public function scopeOfCompany(Builder $query, string $companyId): void
+    {
+        $query->where('company_id', $companyId);
     }
 }

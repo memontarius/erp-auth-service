@@ -9,4 +9,9 @@ class Role extends Model
     protected $casts = [
         'type' => \App\Enums\Role::class
     ];
+
+    protected $fillable = [
+        'name',
+        'type'
+    ];
 }

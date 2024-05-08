@@ -1,0 +1,36 @@
+"A datetime string with format `Y-m-d H:i:s`, e.g. `2018-05-23 13:43:32`."
+scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
+
+"Indicates what fields are available at the top level of a query operation."
+type Query {
+    dummy: String
+}
+
+type Mutation  {
+    "Log in the user with generate jwt-token"
+    login(email: String! password: String!): AuthResult
+    "Invite company"
+    inviteCompany(email: String! company: String!): String! @guard(with: ["api"])
+    "Invite user"
+    inviteUser(email: String! roles: [Int]!): String! @guard(with: ["api"])
+    "Activate invited user"
+    activateUser(
+        email: String!
+        name: String!
+        lastName: String
+        password: String!
+    ): String @guard(with: ["invitation"])
+}
+
+type AuthResult {
+    token: String!
+    companies: [Int]!
+    roles: [UserCompanyRoles]!
+}
+
+type UserCompanyRoles {
+    company_id: Int
+    roles: [Int]!
+}
+
+

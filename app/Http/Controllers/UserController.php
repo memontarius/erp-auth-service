@@ -51,7 +51,7 @@ class UserController extends Controller
 
         $invitation = auth('invitation')->user();
 
-        if (!$this->checkEmailMatches($data['email'], $invitation)) {
+        if (!self::checkEmailMatches($data['email'], $invitation)) {
             return response()->json(['message' => 'Email don\'t matches'], 500);
         }
 
@@ -77,7 +77,7 @@ class UserController extends Controller
      * @param Authenticatable|null $invitation
      * @return bool
      */
-    public function checkEmailMatches(string $email, Authenticatable ...$authenticatables): bool
+    public static function checkEmailMatches(string $email, Authenticatable ...$authenticatables): bool
     {
         foreach ($authenticatables as $item) {
             if ($item->email !== $email) {
